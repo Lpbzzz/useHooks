@@ -25,4 +25,4 @@ jobs:
     - name: Build
       run: |
         pnpm install
-        pnpm run gulp
+        gulp
