@@ -3,13 +3,10 @@ name: NodeJS with Rollup
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [18.x, 20.x, 22.x]
@@ -27,16 +24,16 @@ jobs:
       uses: pnpm/action-setup@v4.1.0
       with:
         version: "latest"
-        run_install: "true"  # 自动运行 pnpm install
+        run_install: "true"
 
     - name: Run Rollup Build
-      run: pnpm run build  # 执行构建命令
+      run: pnpm run build
 
-    - name: 查看构建后的文件
-      run: ls -la dist  # 列出 dist 目录内容
-      
-    - name: 上传构建结果为 Artifact
+    - name: 查看生成的文件
+      run: ls -la dist
+
+    - name: 上传构建结果为 Artifact（唯一名称）
       uses: actions/upload-artifact@v4
       with:
-        name: build-artifact
-        path: dist/  # 指定要上传的目录或文件路径
+        name: rollup-build-${{ matrix.node-version }}  # 使用 Node 版本作为唯一标识
+        path: dist/
