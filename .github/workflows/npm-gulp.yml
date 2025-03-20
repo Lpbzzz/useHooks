@@ -26,12 +26,8 @@ jobs:
     - name: Setup pnpm
       uses: pnpm/action-setup@v4.1.0
       with:
-        version: "latest"    # 指定 pnpm 版本（可选，默认 latest）
-        # dest: "~/.pnpm-store"  # 可选，指定 pnpm 缓存路径（默认 ~/setup-pnpm）
-        run_install: "true"  # 自动运行 `pnpm install`（可选）
+        version: "latest"
+        run_install: "true"  # 自动运行 pnpm install
 
-    - name: Install Dependencies and Run Gulp
-      run: |
-        # 如果未设置 run_install: true，则需要手动安装依赖
-        # pnpm install
-        pnpm run gulp
+    - name: Run Gulp
+      run: pnpm run gulp
